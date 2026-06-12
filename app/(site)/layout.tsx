@@ -4,7 +4,10 @@ import { SiteHeader } from "@/components/SiteHeader";
 
 export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col bg-white text-neutral-900">
+    <div
+      className="flex min-h-screen flex-col"
+      style={{ background: "var(--background)", color: "var(--foreground)" }}
+    >
       <SiteHeader />
       <main className="flex-1">{children}</main>
       <SiteFooter />

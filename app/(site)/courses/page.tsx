@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Reveal } from "@/components/Reveal";
+import { FadeIn } from "@/components/ui/fade-in";
+import { GradientText } from "@/components/ui/gradient-text";
 
 const filters = ["All", "Machine Learning", "Systems", "Frontend", "Data Science", "AI"] as const;
 
@@ -88,44 +89,50 @@ export default function CoursesPage() {
 
   return (
     <>
-      <section className="border-b border-neutral-100 bg-white py-14 sm:py-16">
+      <section className="border-b py-14 sm:py-16" style={{ background: "var(--card)", borderColor: "var(--border)" }}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-[#2563eb]">
+          <FadeIn>
+            <span
+              className="inline-flex rounded-full px-3 py-1 text-xs font-semibold"
+              style={{ background: "color-mix(in srgb, var(--brand) 10%, transparent)", color: "var(--brand)" }}
+            >
               Learning Management System
             </span>
-            <h1 className="mt-4 text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl">
-              Deepen Your <span className="text-[#2563eb]">Engineering</span> Expertise
+            <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl" style={{ color: "var(--foreground)" }}>
+              Deepen Your{" "}
+              <GradientText>Engineering</GradientText>{" "}
+              Expertise
             </h1>
-            <p className="mt-4 max-w-2xl text-lg text-neutral-600">
+            <p className="mt-4 max-w-2xl text-lg" style={{ color: "var(--muted-fg)" }}>
               Structured tutorials, expert-led courses, and comprehensive materials focused on software architecture
               and machine learning.
             </p>
-            <div className="mt-6 flex items-center gap-3 text-sm text-neutral-600">
+            <div className="mt-6 flex items-center gap-3 text-sm" style={{ color: "var(--muted-fg)" }}>
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((i) => (
                   <span
                     key={i}
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-neutral-200 text-[10px] font-bold text-neutral-600"
+                    className="inline-flex h-8 w-8 items-center justify-center rounded-full border-2 text-[10px] font-bold"
+                    style={{ borderColor: "var(--card)", background: "var(--surface)", color: "var(--surface-fg)" }}
                   >
                     {String.fromCharCode(64 + i)}
                   </span>
                 ))}
               </div>
               <p>
-                Joined by <span className="font-semibold text-neutral-900">2,400+</span> ambitious engineers
+                Joined by <span className="font-semibold" style={{ color: "var(--foreground)" }}>2,400+</span> ambitious engineers
               </p>
             </div>
-          </Reveal>
+          </FadeIn>
         </div>
       </section>
 
-      <section className="bg-neutral-50 py-14 sm:py-16">
+      <section className="py-14 sm:py-16" style={{ background: "var(--muted)" }}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <FadeIn className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-neutral-900">Course Catalog</h2>
-              <p className="mt-1 text-sm text-neutral-600">Showing 6 premium learning modules</p>
+              <h2 className="text-2xl font-bold" style={{ color: "var(--foreground)" }}>Course Catalog</h2>
+              <p className="mt-1 text-sm" style={{ color: "var(--muted-fg)" }}>Showing 6 premium learning modules</p>
             </div>
             <div className="flex flex-wrap gap-2">
               {filters.map((f) => (
@@ -133,20 +140,26 @@ export default function CoursesPage() {
                   key={f}
                   type="button"
                   onClick={() => setActive(f)}
-                  className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${
-                    active === f ? "bg-[#2563eb] text-white" : "border border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50"
-                  }`}
+                  className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
+                  style={
+                    active === f
+                      ? { background: "var(--brand)", color: "#fff" }
+                      : { border: "1px solid var(--border)", background: "var(--card)", color: "var(--surface-fg)" }
+                  }
                 >
                   {f}
                 </button>
               ))}
             </div>
-          </Reveal>
+          </FadeIn>
 
           <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {list.map((c, i) => (
-              <Reveal key={c.title} delay={0.05 * i}>
-                <article className="card-hover flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
+              <FadeIn key={c.title} delay={0.05 * i}>
+                <article
+                  className="card-hover flex h-full flex-col overflow-hidden rounded-2xl border shadow-sm"
+                  style={{ background: "var(--card)", borderColor: "var(--border)" }}
+                >
                   <div className="relative aspect-[16/10]">
                     <Image src={c.img} alt="" fill className="object-cover" sizes="(max-width:768px) 100vw, 33vw" />
                     <span className="absolute left-3 top-3 rounded-md bg-white/95 px-2 py-1 text-xs font-semibold text-neutral-800 shadow">
@@ -154,21 +167,22 @@ export default function CoursesPage() {
                     </span>
                   </div>
                   <div className="flex flex-1 flex-col p-5">
-                    <h3 className="text-lg font-bold text-neutral-900">{c.title}</h3>
-                    <p className="mt-2 flex-1 text-sm text-neutral-600">{c.desc}</p>
-                    <div className="mt-4 flex flex-wrap gap-4 text-xs text-neutral-500">
+                    <h3 className="text-lg font-bold" style={{ color: "var(--foreground)" }}>{c.title}</h3>
+                    <p className="mt-2 flex-1 text-sm" style={{ color: "var(--muted-fg)" }}>{c.desc}</p>
+                    <div className="mt-4 flex flex-wrap gap-4 text-xs" style={{ color: "var(--muted-fg)" }}>
                       <span>{c.hours}</span>
                       <span>{c.students}</span>
                     </div>
                     {c.progress > 0 && c.progress < 100 ? (
                       <div className="mt-4">
-                        <div className="mb-1 flex justify-between text-xs font-medium text-neutral-600">
+                        <div className="mb-1 flex justify-between text-xs font-medium" style={{ color: "var(--muted-fg)" }}>
                           <span>Progress</span>
                           <span>{c.progress}%</span>
                         </div>
-                        <div className="h-2 overflow-hidden rounded-full bg-neutral-100">
+                        <div className="h-2 overflow-hidden rounded-full" style={{ background: "var(--surface)" }}>
                           <motion.div
-                            className="h-full rounded-full bg-[#2563eb]"
+                            className="h-full rounded-full"
+                            style={{ background: "var(--brand)" }}
                             initial={{ width: 0 }}
                             whileInView={{ width: `${c.progress}%` }}
                             viewport={{ once: true }}
@@ -179,11 +193,11 @@ export default function CoursesPage() {
                     ) : null}
                     {c.progress === 100 ? (
                       <div className="mt-4">
-                        <div className="mb-1 flex justify-between text-xs font-medium text-neutral-600">
+                        <div className="mb-1 flex justify-between text-xs font-medium" style={{ color: "var(--muted-fg)" }}>
                           <span>Completed</span>
                           <span>100%</span>
                         </div>
-                        <div className="h-2 overflow-hidden rounded-full bg-neutral-100">
+                        <div className="h-2 overflow-hidden rounded-full" style={{ background: "var(--surface)" }}>
                           <motion.div
                             className="h-full rounded-full bg-emerald-500"
                             initial={{ width: 0 }}
@@ -198,7 +212,8 @@ export default function CoursesPage() {
                       {c.cta === "continue" ? (
                         <Link
                           href="#"
-                          className="inline-flex w-full items-center justify-center rounded-full bg-[#2563eb] py-2.5 text-sm font-semibold text-white hover:bg-[#1d4ed8]"
+                          className="inline-flex w-full items-center justify-center rounded-full py-2.5 text-sm font-semibold text-white"
+                          style={{ background: "var(--brand)" }}
                         >
                           Continue Learning
                         </Link>
@@ -206,7 +221,8 @@ export default function CoursesPage() {
                       {c.cta === "enroll" ? (
                         <Link
                           href="#"
-                          className="inline-flex w-full items-center justify-center gap-1 rounded-full border border-[#2563eb] py-2.5 text-sm font-semibold text-[#2563eb] hover:bg-blue-50"
+                          className="inline-flex w-full items-center justify-center gap-1 rounded-full border py-2.5 text-sm font-semibold"
+                          style={{ borderColor: "var(--brand)", color: "var(--brand)" }}
                         >
                           Enroll Now
                           <span aria-hidden>→</span>
@@ -215,7 +231,8 @@ export default function CoursesPage() {
                       {c.cta === "review" ? (
                         <Link
                           href="#"
-                          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#2563eb] py-2.5 text-sm font-semibold text-white hover:bg-[#1d4ed8]"
+                          className="inline-flex w-full items-center justify-center gap-2 rounded-full py-2.5 text-sm font-semibold text-white"
+                          style={{ background: "var(--brand)" }}
                         >
                           <span aria-hidden>🏆</span>
                           Review Course
@@ -224,33 +241,35 @@ export default function CoursesPage() {
                     </div>
                   </div>
                 </article>
-              </Reveal>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-neutral-200 bg-blue-50/50 py-14">
+      <section className="border-t py-14" style={{ borderColor: "var(--border)", background: "color-mix(in srgb, var(--brand) 4%, var(--muted))" }}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="flex flex-col items-stretch gap-4 rounded-2xl border border-blue-100 bg-white p-8 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col items-stretch gap-4 rounded-2xl border p-8 shadow-sm sm:flex-row sm:items-center sm:justify-between" style={{ background: "var(--card)", borderColor: "var(--border)" }}>
             <div>
-              <h2 className="text-xl font-bold text-neutral-900">Get New Course Alerts</h2>
-              <p className="mt-2 text-sm text-neutral-600">Monthly technical tutorials—no spam, unsubscribe anytime.</p>
+              <h2 className="text-xl font-bold" style={{ color: "var(--foreground)" }}>Get New Course Alerts</h2>
+              <p className="mt-2 text-sm" style={{ color: "var(--muted-fg)" }}>Monthly technical tutorials—no spam, unsubscribe anytime.</p>
             </div>
             <div className="flex w-full flex-col gap-2 sm:max-w-md sm:flex-row">
               <input
                 type="email"
                 placeholder="engineer@domain.com"
-                className="input-focus flex-1 rounded-xl border border-neutral-200 px-4 py-3 text-sm"
+                className="input-focus flex-1 rounded-xl border px-4 py-3 text-sm"
+                style={{ borderColor: "var(--border)", background: "var(--muted)", color: "var(--foreground)" }}
               />
               <button
                 type="button"
-                className="rounded-full bg-[#2563eb] px-6 py-3 text-sm font-semibold text-white hover:bg-[#1d4ed8]"
+                className="rounded-full px-6 py-3 text-sm font-semibold text-white"
+                style={{ background: "var(--brand)" }}
               >
                 Subscribe Now
               </button>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
     </>

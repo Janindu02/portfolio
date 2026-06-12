@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Reveal } from "@/components/Reveal";
+import { FadeIn } from "@/components/ui/fade-in";
+import { GradientText } from "@/components/ui/gradient-text";
 
 const areas = [
   "All Areas",
@@ -58,22 +59,25 @@ export default function ResearchPage() {
 
   return (
     <>
-      <section className="border-b border-neutral-100 bg-white py-14 sm:py-16">
+      <section className="border-b py-14 sm:py-16" style={{ background: "var(--card)", borderColor: "var(--border)" }}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-[#2563eb]">
+          <FadeIn>
+            <span
+              className="inline-flex rounded-full px-3 py-1 text-xs font-semibold"
+              style={{ background: "color-mix(in srgb, var(--brand) 10%, transparent)", color: "var(--brand)" }}
+            >
               Scholar Profile
             </span>
-            <h1 className="mt-4 text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl">
-              Research &amp; Publications
+            <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl" style={{ color: "var(--foreground)" }}>
+              Research &amp; <GradientText>Publications</GradientText>
             </h1>
-            <p className="mt-4 max-w-2xl text-lg text-neutral-600">
+            <p className="mt-4 max-w-2xl text-lg" style={{ color: "var(--muted-fg)" }}>
               Exploring machine learning, generative AI, and distributed systems through rigorous inquiry and
               open-source contributions.
             </p>
-          </Reveal>
+          </FadeIn>
 
-          <Reveal className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" delay={0.05}>
+          <FadeIn className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" delay={0.05}>
             {[
               { k: "6,120+", l: "Google Scholar Citations", icon: "M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" },
               { k: "24", l: "Peer-Reviewed Papers", icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
@@ -82,25 +86,30 @@ export default function ResearchPage() {
             ].map((s) => (
               <div
                 key={s.l}
-                className="flex items-center gap-4 border-b border-neutral-200 pb-6 lg:border-b-0 lg:border-r lg:border-neutral-200 lg:pb-0 lg:pr-6 last:border-0 last:pr-0"
+                className="flex items-center gap-4 border-b pb-6 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-6 last:border-0 last:pr-0"
+                style={{ borderColor: "var(--border)" }}
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-[#2563eb]">
+                <span
+                  className="flex h-11 w-11 items-center justify-center rounded-xl"
+                  style={{ background: "color-mix(in srgb, var(--brand) 10%, transparent)", color: "var(--brand)" }}
+                >
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={s.icon} />
                   </svg>
                 </span>
                 <div>
-                  <p className="text-2xl font-bold text-neutral-900">{s.k}</p>
-                  <p className="text-xs text-neutral-600">{s.l}</p>
+                  <p className="text-2xl font-bold" style={{ color: "var(--foreground)" }}>{s.k}</p>
+                  <p className="text-xs" style={{ color: "var(--muted-fg)" }}>{s.l}</p>
                 </div>
               </div>
             ))}
-          </Reveal>
+          </FadeIn>
 
-          <Reveal className="mt-10 space-y-4" delay={0.1}>
+          <FadeIn className="mt-10 space-y-4" delay={0.1}>
             <div className="relative">
               <svg
-                className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-400"
+                className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2"
+                style={{ color: "var(--muted-fg)" }}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -110,7 +119,8 @@ export default function ResearchPage() {
               <input
                 type="search"
                 placeholder="Search by title, author, or keywords"
-                className="input-focus w-full rounded-xl border border-neutral-200 bg-neutral-50 py-3 pl-11 pr-4 text-sm text-neutral-900 placeholder:text-neutral-500"
+                className="input-focus w-full rounded-xl border py-3 pl-11 pr-4 text-sm"
+                style={{ borderColor: "var(--border)", background: "var(--muted)", color: "var(--foreground)" }}
               />
             </div>
             <div className="flex flex-wrap gap-2">
@@ -119,90 +129,100 @@ export default function ResearchPage() {
                   key={a}
                   type="button"
                   onClick={() => setArea(a)}
-                  className={`rounded-full px-3 py-1.5 text-xs font-semibold transition-colors ${
-                    area === a ? "bg-[#2563eb] text-white" : "border border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50"
-                  }`}
+                  className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
+                  style={
+                    area === a
+                      ? { background: "var(--brand)", color: "#fff" }
+                      : { border: "1px solid var(--border)", background: "var(--card)", color: "var(--surface-fg)" }
+                  }
                 >
                   {a}
                 </button>
               ))}
             </div>
-          </Reveal>
+          </FadeIn>
         </div>
       </section>
 
-      <section className="bg-neutral-50 py-12 sm:py-14">
+      <section className="py-12 sm:py-14" style={{ background: "var(--muted)" }}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="flex items-center gap-2 text-lg font-bold text-neutral-900">
-              <svg className="h-5 w-5 text-[#2563eb]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <FadeIn className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="flex items-center gap-2 text-lg font-bold" style={{ color: "var(--foreground)" }}>
+              <svg className="h-5 w-5" style={{ color: "var(--brand)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
               Archive ({papers.length})
             </h2>
-            <p className="text-sm text-neutral-600">
-              Sorted by: <span className="font-semibold text-neutral-900">Newest First</span>
+            <p className="text-sm" style={{ color: "var(--muted-fg)" }}>
+              Sorted by: <span className="font-semibold" style={{ color: "var(--foreground)" }}>Newest First</span>
             </p>
-          </Reveal>
+          </FadeIn>
 
           <div className="mt-8 space-y-5">
             {papers.map((paper, i) => (
-              <Reveal key={paper.title} delay={0.04 * i}>
-                <article className="card-hover overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
-                  <div className="flex flex-wrap items-start justify-between gap-3 border-b border-neutral-100 p-5 sm:p-6">
+              <FadeIn key={paper.title} delay={0.04 * i}>
+                <article className="card-hover overflow-hidden rounded-2xl border shadow-sm" style={{ background: "var(--card)", borderColor: "var(--border)" }}>
+                  <div className="flex flex-wrap items-start justify-between gap-3 border-b p-5 sm:p-6" style={{ borderColor: "var(--border)" }}>
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="rounded-md bg-neutral-100 px-2 py-0.5 text-xs font-semibold text-neutral-700">
+                      <span className="rounded-md px-2 py-0.5 text-xs font-semibold" style={{ background: "var(--surface)", color: "var(--surface-fg)" }}>
                         {paper.type}
                       </span>
-                      <span className="rounded-md bg-neutral-100 px-2 py-0.5 text-xs font-semibold text-neutral-700">
+                      <span className="rounded-md px-2 py-0.5 text-xs font-semibold" style={{ background: "var(--surface)", color: "var(--surface-fg)" }}>
                         {paper.year}
                       </span>
                     </div>
-                    <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-[#2563eb]">
+                    <span
+                      className="rounded-full px-3 py-1 text-xs font-semibold"
+                      style={{ background: "color-mix(in srgb, var(--brand) 10%, transparent)", color: "var(--brand)" }}
+                    >
                       {paper.cites}
                     </span>
                   </div>
                   <div className="p-5 sm:p-6">
-                    <h3 className="text-lg font-bold text-neutral-900">{paper.title}</h3>
-                    <p className="mt-2 text-sm text-neutral-600">
+                    <h3 className="text-lg font-bold" style={{ color: "var(--foreground)" }}>{paper.title}</h3>
+                    <p className="mt-2 text-sm" style={{ color: "var(--muted-fg)" }}>
                       {paper.authors.split("Jane Doe").map((part, idx, arr) => (
                         <span key={idx}>
                           {part}
                           {idx < arr.length - 1 ? (
-                            <span className="font-semibold underline decoration-[#2563eb] decoration-2">
+                            <span className="font-semibold underline decoration-2" style={{ textDecorationColor: "var(--brand)" }}>
                               Jane Doe
                             </span>
                           ) : null}
                         </span>
                       ))}
                     </p>
-                    <p className="mt-1 text-sm italic text-neutral-500">{paper.venue}</p>
+                    <p className="mt-1 text-sm italic" style={{ color: "var(--muted-fg)" }}>{paper.venue}</p>
                   </div>
-                  <div className="flex flex-wrap items-center gap-3 border-t border-neutral-100 bg-neutral-50/80 px-5 py-4 text-xs font-semibold sm:px-6">
-                    <button type="button" className="text-neutral-600 hover:text-[#2563eb]">
+                  <div
+                    className="flex flex-wrap items-center gap-3 border-t px-5 py-4 text-xs font-semibold sm:px-6"
+                    style={{ borderColor: "var(--border)", background: "var(--muted)" }}
+                  >
+                    <button type="button" className="transition-colors hover:opacity-80" style={{ color: "var(--muted-fg)" }}>
                       View Abstract
                     </button>
-                    <button type="button" className="text-neutral-600 hover:text-[#2563eb]">
+                    <button type="button" className="transition-colors hover:opacity-80" style={{ color: "var(--muted-fg)" }}>
                       Full Details
                     </button>
-                    <button type="button" className="text-neutral-600 hover:text-[#2563eb]">
+                    <button type="button" className="transition-colors hover:opacity-80" style={{ color: "var(--muted-fg)" }}>
                       Code
                     </button>
                     <button
                       type="button"
-                      className="ml-auto inline-flex items-center gap-1 rounded-full bg-[#2563eb] px-3 py-1.5 text-white hover:bg-[#1d4ed8]"
+                      className="ml-auto inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-white"
+                      style={{ background: "var(--brand)" }}
                     >
                       PDF
                       <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                       </svg>
                     </button>
-                    <button type="button" className="text-neutral-600 hover:text-[#2563eb]">
+                    <button type="button" className="transition-colors hover:opacity-80" style={{ color: "var(--muted-fg)" }}>
                       BibTeX
                     </button>
                   </div>
                 </article>
-              </Reveal>
+              </FadeIn>
             ))}
           </div>
         </div>

@@ -1,4 +1,5 @@
 export const NAV = [
+  { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
   { href: "/research", label: "Research" },
   { href: "/blog", label: "Blog" },
@@ -20,5 +21,4 @@ export const FOOTER_RESOURCES = [
   { href: "/forum", label: "Brainstorm Forum" },
 ] as const;
 
-export const PORTRAIT =
-  "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=80";
+export const PORTRAIT = "/pics/janindua.jpg";
