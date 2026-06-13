@@ -1,62 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { FadeIn } from "@/components/ui/fade-in";
 import { GradientText } from "@/components/ui/gradient-text";
 
-const areas = [
-  "All Areas",
-  "Computer Vision",
-  "Generative AI",
-  "Deep Learning",
-  "NLP",
-  "Scaling Laws",
-  "Infrastructure",
-  "Robotics",
-  "Safety",
-  "Graph ML",
-  "Bioinformatics",
-  "Science",
-] as const;
-
-const papers = [
-  {
-    type: "Conference",
-    year: "2023",
-    cites: "1240 Citations",
-    title: "Latent Diffusion Models for High-Resolution Image Synthesis",
-    authors: "Rombach, R., ..., Jane Doe",
-    venue: "CVPR",
-  },
-  {
-    type: "Journal",
-    year: "2022",
-    cites: "890 Citations",
-    title: "Attention is All You Need: Scaling Transformers to Billion-Parameter Regimes",
-    authors: "Vaswani, A., ..., Jane Doe",
-    venue: "Journal of Machine Learning Research",
-  },
-  {
-    type: "Journal",
-    year: "2021",
-    cites: "412 Citations",
-    title: "Robust Out-of-Distribution Detection in Autonomous Driving Systems",
-    authors: "Jane Doe, et al.",
-    venue: "IEEE Transactions on Pattern Analysis",
-  },
-  {
-    type: "Journal",
-    year: "2020",
-    cites: "301 Citations",
-    title: "Graph Neural Networks for Drug Discovery and Molecular Property Prediction",
-    authors: "Jane Doe, et al.",
-    venue: "Nature Machine Intelligence",
-  },
-];
-
 export default function ResearchPage() {
-  const [area, setArea] = useState<(typeof areas)[number]>("All Areas");
-
   return (
     <>
       <section className="border-b py-14 sm:py-16" style={{ background: "var(--card)", borderColor: "var(--border)" }}>
@@ -76,155 +23,88 @@ export default function ResearchPage() {
               open-source contributions.
             </p>
           </FadeIn>
-
-          <FadeIn className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" delay={0.05}>
-            {[
-              { k: "6,120+", l: "Google Scholar Citations", icon: "M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" },
-              { k: "24", l: "Peer-Reviewed Papers", icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
-              { k: "18", l: "h-index (i10: 22)", icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
-              { k: "3", l: "Best Paper Awards", icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" },
-            ].map((s) => (
-              <div
-                key={s.l}
-                className="flex items-center gap-4 border-b pb-6 lg:border-b-0 lg:border-r lg:pb-0 lg:pr-6 last:border-0 last:pr-0"
-                style={{ borderColor: "var(--border)" }}
-              >
-                <span
-                  className="flex h-11 w-11 items-center justify-center rounded-xl"
-                  style={{ background: "color-mix(in srgb, var(--brand) 10%, transparent)", color: "var(--brand)" }}
-                >
-                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={s.icon} />
-                  </svg>
-                </span>
-                <div>
-                  <p className="text-2xl font-bold" style={{ color: "var(--foreground)" }}>{s.k}</p>
-                  <p className="text-xs" style={{ color: "var(--muted-fg)" }}>{s.l}</p>
-                </div>
-              </div>
-            ))}
-          </FadeIn>
-
-          <FadeIn className="mt-10 space-y-4" delay={0.1}>
-            <div className="relative">
-              <svg
-                className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2"
-                style={{ color: "var(--muted-fg)" }}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-              <input
-                type="search"
-                placeholder="Search by title, author, or keywords"
-                className="input-focus w-full rounded-xl border py-3 pl-11 pr-4 text-sm"
-                style={{ borderColor: "var(--border)", background: "var(--muted)", color: "var(--foreground)" }}
-              />
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {areas.map((a) => (
-                <button
-                  key={a}
-                  type="button"
-                  onClick={() => setArea(a)}
-                  className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
-                  style={
-                    area === a
-                      ? { background: "var(--brand)", color: "#fff" }
-                      : { border: "1px solid var(--border)", background: "var(--card)", color: "var(--surface-fg)" }
-                  }
-                >
-                  {a}
-                </button>
-              ))}
-            </div>
-          </FadeIn>
         </div>
       </section>
 
-      <section className="py-12 sm:py-14" style={{ background: "var(--muted)" }}>
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <FadeIn className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="flex items-center gap-2 text-lg font-bold" style={{ color: "var(--foreground)" }}>
-              <svg className="h-5 w-5" style={{ color: "var(--brand)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Archive ({papers.length})
-            </h2>
-            <p className="text-sm" style={{ color: "var(--muted-fg)" }}>
-              Sorted by: <span className="font-semibold" style={{ color: "var(--foreground)" }}>Newest First</span>
-            </p>
-          </FadeIn>
+      <section className="py-20 sm:py-28 flex items-center justify-center min-h-screen" style={{ background: "var(--muted)" }}>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 w-full">
+          <FadeIn className="flex flex-col items-center justify-center text-center">
+            <div className="mb-8 relative">
+              <div
+                className="animate-pulse"
+                style={{
+                  width: "120px",
+                  height: "120px",
+                  borderRadius: "50%",
+                  background: "conic-gradient(var(--brand), transparent)",
+                  animation: "spin-slow 3s linear infinite",
+                }}
+              >
+                <style>{`
+                  @keyframes spin-slow {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                  }
+                  .research-dot {
+                    animation: bounce-dot 2s ease-in-out infinite;
+                  }
+                `}</style>
+              </div>
+              <div
+                className="absolute inset-0 flex items-center justify-center"
+                style={{
+                  width: "120px",
+                  height: "120px",
+                  background: "var(--card)",
+                  borderRadius: "50%",
+                  left: "50%",
+                  top: "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                <svg className="h-12 w-12 research-dot" style={{ color: "var(--brand)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5a4 4 0 100-8 4 4 0 000 8z" />
+                </svg>
+              </div>
+            </div>
 
-          <div className="mt-8 space-y-5">
-            {papers.map((paper, i) => (
-              <FadeIn key={paper.title} delay={0.04 * i}>
-                <article className="card-hover overflow-hidden rounded-2xl border shadow-sm" style={{ background: "var(--card)", borderColor: "var(--border)" }}>
-                  <div className="flex flex-wrap items-start justify-between gap-3 border-b p-5 sm:p-6" style={{ borderColor: "var(--border)" }}>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="rounded-md px-2 py-0.5 text-xs font-semibold" style={{ background: "var(--surface)", color: "var(--surface-fg)" }}>
-                        {paper.type}
-                      </span>
-                      <span className="rounded-md px-2 py-0.5 text-xs font-semibold" style={{ background: "var(--surface)", color: "var(--surface-fg)" }}>
-                        {paper.year}
-                      </span>
-                    </div>
-                    <span
-                      className="rounded-full px-3 py-1 text-xs font-semibold"
-                      style={{ background: "color-mix(in srgb, var(--brand) 10%, transparent)", color: "var(--brand)" }}
-                    >
-                      {paper.cites}
-                    </span>
-                  </div>
-                  <div className="p-5 sm:p-6">
-                    <h3 className="text-lg font-bold" style={{ color: "var(--foreground)" }}>{paper.title}</h3>
-                    <p className="mt-2 text-sm" style={{ color: "var(--muted-fg)" }}>
-                      {paper.authors.split("Jane Doe").map((part, idx, arr) => (
-                        <span key={idx}>
-                          {part}
-                          {idx < arr.length - 1 ? (
-                            <span className="font-semibold underline decoration-2" style={{ textDecorationColor: "var(--brand)" }}>
-                              Jane Doe
-                            </span>
-                          ) : null}
-                        </span>
-                      ))}
-                    </p>
-                    <p className="mt-1 text-sm italic" style={{ color: "var(--muted-fg)" }}>{paper.venue}</p>
-                  </div>
-                  <div
-                    className="flex flex-wrap items-center gap-3 border-t px-5 py-4 text-xs font-semibold sm:px-6"
-                    style={{ borderColor: "var(--border)", background: "var(--muted)" }}
-                  >
-                    <button type="button" className="transition-colors hover:opacity-80" style={{ color: "var(--muted-fg)" }}>
-                      View Abstract
-                    </button>
-                    <button type="button" className="transition-colors hover:opacity-80" style={{ color: "var(--muted-fg)" }}>
-                      Full Details
-                    </button>
-                    <button type="button" className="transition-colors hover:opacity-80" style={{ color: "var(--muted-fg)" }}>
-                      Code
-                    </button>
-                    <button
-                      type="button"
-                      className="ml-auto inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-white"
-                      style={{ background: "var(--brand)" }}
-                    >
-                      PDF
-                      <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                      </svg>
-                    </button>
-                    <button type="button" className="transition-colors hover:opacity-80" style={{ color: "var(--muted-fg)" }}>
-                      BibTeX
-                    </button>
-                  </div>
-                </article>
-              </FadeIn>
-            ))}
-          </div>
+            <h2 className="mt-12 text-3xl sm:text-4xl font-bold" style={{ color: "var(--foreground)" }}>
+              I&apos;m <GradientText>Working on It</GradientText>
+            </h2>
+
+            <p className="mt-6 max-w-xl text-lg" style={{ color: "var(--muted-fg)" }}>
+              My research papers and publications are currently being compiled. Stay tuned for updates on my latest work in machine learning and software engineering.
+            </p>
+
+            <div className="mt-10 flex gap-3 justify-center flex-wrap">
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
+                style={{
+                  borderColor: "var(--border)",
+                  background: "var(--surface)",
+                  color: "var(--foreground)",
+                }}
+              >
+                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+                View on GitHub
+              </a>
+              <a
+                href="mailto:contact@example.com"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
+                style={{
+                  background: "var(--brand)",
+                  color: "#fff",
+                }}
+              >
+                Get in Touch
+              </a>
+            </div>
+          </FadeIn>
         </div>
       </section>
     </>

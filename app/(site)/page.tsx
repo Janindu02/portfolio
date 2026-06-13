@@ -101,6 +101,9 @@ export default function HomePage() {
               className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl lg:text-[2.75rem] lg:leading-[1.1]"
               style={{ color: "var(--foreground)" }}
             >
+              <div className="animate-fadeInUp">
+                Hi, I&apos;m <GradientText>Janindu Amaraweera</GradientText>
+              </div>
               <VerticalLoop
                 words={["Building", "Crafting", "Shipping", "Designing"]}
                 duration={3}
