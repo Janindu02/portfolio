@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { FadeIn } from "@/components/ui/fade-in";
 import { GradientText } from "@/components/ui/gradient-text";
+import { RainbowButton } from "@/components/ui/rainbow-button";
+import { BackgroundGradient } from "@/components/ui/background-gradient";
 
 const jobs = [
   {
@@ -92,13 +94,7 @@ export default function ExperiencePage() {
               </svg>
               Download CV
             </a>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold text-white"
-              style={{ background: "var(--brand)" }}
-            >
-              Hire Me
-            </Link>
+            <RainbowButton href="/contact">Hire Me</RainbowButton>
           </FadeIn>
         </div>
       </section>
@@ -133,6 +129,7 @@ export default function ExperiencePage() {
                         className="absolute -left-[22px] top-4 flex h-3 w-3 rounded-full border-4 shadow sm:-left-[26px]"
                         style={{ background: "var(--brand)", borderColor: "var(--card)" }}
                       />
+                      <BackgroundGradient containerClassName="rounded-2xl">
                       <article
                         className="card-hover rounded-2xl border p-6 shadow-sm sm:p-7"
                         style={{ background: "var(--card)", borderColor: "var(--border)" }}
@@ -180,6 +177,7 @@ export default function ExperiencePage() {
                           ))}
                         </div>
                       </article>
+                      </BackgroundGradient>
                     </div>
                   </FadeIn>
                 ))}
@@ -189,6 +187,7 @@ export default function ExperiencePage() {
 
           <aside className="space-y-6">
             <FadeIn>
+              <BackgroundGradient containerClassName="rounded-2xl">
               <div className="rounded-2xl border p-6 shadow-sm" style={{ background: "var(--card)", borderColor: "var(--border)" }}>
                 <div className="flex items-center gap-2">
                   <span
@@ -227,6 +226,7 @@ export default function ExperiencePage() {
                   ))}
                 </ul>
               </div>
+              </BackgroundGradient>
             </FadeIn>
 
             <FadeIn delay={0.06}>
@@ -250,6 +250,7 @@ export default function ExperiencePage() {
             </FadeIn>
 
             <FadeIn delay={0.1}>
+              <BackgroundGradient containerClassName="rounded-2xl">
               <div
                 className="rounded-2xl border p-6 text-sm shadow-sm"
                 style={{ background: "var(--card)", borderColor: "var(--border)", color: "var(--muted-fg)" }}
@@ -266,6 +267,7 @@ export default function ExperiencePage() {
                   </svg>
                 </Link>
               </div>
+              </BackgroundGradient>
             </FadeIn>
           </aside>
         </div>

@@ -139,6 +139,56 @@ body {
   to   { opacity: 1; }
 }
 
+/* ── Rainbow button ─────────────────────────────────────────────── */
+@property --rb-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rb-spin {
+  to { --rb-angle: 360deg; }
+}
+
+.rainbow-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--rb-angle),
+    #ff0080, #ff8c00, #ffe600, #00c896, #0099ff, #7c3aed, #ff0080
+  );
+  animation: rb-spin 3s linear infinite;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s;
+  text-decoration: none;
+}
+
+.rainbow-btn:hover  { transform: scale(1.04); }
+.rainbow-btn:active { transform: scale(0.97); }
+.rainbow-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.rainbow-btn-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 22px;
+  border-radius: 9999px;
+  background: var(--brand);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.25;
+  width: 100%;
+}
+
+[data-theme="dark"] .rainbow-btn-inner {
+  background: color-mix(in srgb, var(--brand) 75%, #07071a);
+}
+
 /* ── Fade in up animation ───────────────────────────────────────── */
 @keyframes fadeInUp {
   from {

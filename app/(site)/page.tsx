@@ -7,6 +7,7 @@ import { LampContainer } from "@/components/ui/lamp";
 import { TrueFocus } from "@/components/ui/true-focus";
 import { GradientText } from "@/components/ui/gradient-text";
 import { MovingBorderButton } from "@/components/ui/moving-border";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 import { CometCard } from "@/components/ui/comet-card";
 import { FadeIn } from "@/components/ui/fade-in";
 import { VerticalLoop } from "@/components/ui/vertical-loop";
@@ -126,21 +127,12 @@ export default function HomePage() {
               <MovingBorderButton href="/contact">
                 Let&apos;s Connect
               </MovingBorderButton>
-              <a
-                href="/cv/Janindu Amaraweera.pdf"
-                download
-                className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
-                style={{
-                  borderColor: "var(--border)",
-                  background: "var(--surface)",
-                  color: "var(--foreground)",
-                }}
-              >
+              <RainbowButton href="/cv/Janindu Amaraweera.pdf" download>
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
                 Download CV
-              </a>
+              </RainbowButton>
             </div>
 
             <HeroSocials />

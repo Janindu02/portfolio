@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { FadeIn } from "@/components/ui/fade-in";
 import { GradientText } from "@/components/ui/gradient-text";
+import { RainbowButton } from "@/components/ui/rainbow-button";
+import { BackgroundGradient } from "@/components/ui/background-gradient";
 import { PORTRAIT } from "@/lib/site";
 
 const contents = [
@@ -132,6 +134,7 @@ export default function AboutPage() {
                 },
               ].map((e, i) => (
                 <FadeIn key={e.school} delay={i * 0.08}>
+                  <BackgroundGradient containerClassName="rounded-2xl">
                   <div
                     className="card-hover group rounded-2xl border p-6 shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-1"
                     style={{ background: "var(--card)", borderColor: "var(--border)" }}
@@ -176,6 +179,7 @@ export default function AboutPage() {
                       ))}
                     </ul>
                   </div>
+                  </BackgroundGradient>
                 </FadeIn>
               ))}
             </div>
@@ -201,15 +205,16 @@ export default function AboutPage() {
                   foot: "Government of Sri Lanka",
                 },
               ].map((c) => (
-                <div
-                  key={c.title}
-                  className="rounded-2xl border p-6"
-                  style={{ background: "var(--surface)", borderColor: "var(--border)" }}
-                >
-                  <h3 className="font-semibold" style={{ color: "var(--foreground)" }}>{c.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--muted-fg)" }}>{c.body}</p>
-                  <p className="mt-4 text-xs font-semibold" style={{ color: "var(--brand)" }}>{c.foot}</p>
-                </div>
+                <BackgroundGradient key={c.title} containerClassName="rounded-2xl">
+                  <div
+                    className="rounded-2xl border p-6"
+                    style={{ background: "var(--card)", borderColor: "var(--border)" }}
+                  >
+                    <h3 className="font-semibold" style={{ color: "var(--foreground)" }}>{c.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--muted-fg)" }}>{c.body}</p>
+                    <p className="mt-4 text-xs font-semibold" style={{ color: "var(--brand)" }}>{c.foot}</p>
+                  </div>
+                </BackgroundGradient>
               ))}
             </div>
           </FadeIn>
@@ -226,8 +231,28 @@ export default function AboutPage() {
                 { tag: "Competition", year: "2025", title: "2nd Runners-up, Cutting Edge 2025", org: "University of Westminster", desc: "Recognised for CeylonMine, an innovative platform to digitise Sri Lanka's mining industry." },
                 { tag: "Academic", year: "2019", title: "G.C.E. O/L — 9 A's, English Medium", org: "Rahula College", desc: "Achieved 9 A grades in the national O/L examination, including ICT, in English medium." },
               ].map((a) => (
+                <BackgroundGradient key={a.title} containerClassName="rounded-2xl">
+                  <div
+                    className="card-hover rounded-2xl border p-6 shadow-sm"
+                    style={{ background: "var(--card)", borderColor: "var(--border)" }}
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span
+                        className="rounded-full px-2.5 py-0.5 text-xs font-medium"
+                        style={{ background: "var(--surface)", color: "var(--surface-fg)" }}
+                      >
+                        {a.tag}
+                      </span>
+                      <span className="text-xs font-semibold" style={{ color: "var(--muted-fg)" }}>{a.year}</span>
+                    </div>
+                    <h3 className="mt-3 font-bold" style={{ color: "var(--foreground)" }}>{a.title}</h3>
+                    <p className="text-sm font-semibold" style={{ color: "var(--brand)" }}>{a.org}</p>
+                    <p className="mt-2 text-sm" style={{ color: "var(--muted-fg)" }}>{a.desc}</p>
+                  </div>
+                </BackgroundGradient>
+              ))}
+              <BackgroundGradient containerClassName="rounded-2xl sm:col-span-2">
                 <div
-                  key={a.title}
                   className="card-hover rounded-2xl border p-6 shadow-sm"
                   style={{ background: "var(--card)", borderColor: "var(--border)" }}
                 >
@@ -236,35 +261,18 @@ export default function AboutPage() {
                       className="rounded-full px-2.5 py-0.5 text-xs font-medium"
                       style={{ background: "var(--surface)", color: "var(--surface-fg)" }}
                     >
-                      {a.tag}
+                      Academic
                     </span>
-                    <span className="text-xs font-semibold" style={{ color: "var(--muted-fg)" }}>{a.year}</span>
+                    <span className="text-xs font-semibold" style={{ color: "var(--muted-fg)" }}>2013</span>
                   </div>
-                  <h3 className="mt-3 font-bold" style={{ color: "var(--foreground)" }}>{a.title}</h3>
-                  <p className="text-sm font-semibold" style={{ color: "var(--brand)" }}>{a.org}</p>
-                  <p className="mt-2 text-sm" style={{ color: "var(--muted-fg)" }}>{a.desc}</p>
+                  <h3 className="mt-3 font-bold" style={{ color: "var(--foreground)" }}>Grade 5 Scholarship Examination</h3>
+                  <p className="text-sm font-semibold" style={{ color: "var(--brand)" }}>Vijitha Central College</p>
+                  <p className="mt-2 text-sm" style={{ color: "var(--muted-fg)" }}>
+                    Achieved 181 marks in the national Grade 5 Scholarship Examination, demonstrating early
+                    academic excellence.
+                  </p>
                 </div>
-              ))}
-              <div
-                className="card-hover rounded-2xl border p-6 shadow-sm sm:col-span-2"
-                style={{ background: "var(--card)", borderColor: "var(--border)" }}
-              >
-                <div className="flex items-center justify-between gap-2">
-                  <span
-                    className="rounded-full px-2.5 py-0.5 text-xs font-medium"
-                    style={{ background: "var(--surface)", color: "var(--surface-fg)" }}
-                  >
-                    Academic
-                  </span>
-                  <span className="text-xs font-semibold" style={{ color: "var(--muted-fg)" }}>2013</span>
-                </div>
-                <h3 className="mt-3 font-bold" style={{ color: "var(--foreground)" }}>Grade 5 Scholarship Examination</h3>
-                <p className="text-sm font-semibold" style={{ color: "var(--brand)" }}>Vijitha Central College</p>
-                <p className="mt-2 text-sm" style={{ color: "var(--muted-fg)" }}>
-                  Achieved 181 marks in the national Grade 5 Scholarship Examination, demonstrating early
-                  academic excellence.
-                </p>
-              </div>
+              </BackgroundGradient>
             </div>
           </FadeIn>
 
@@ -363,17 +371,12 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <a
-                href="/cv/Janindu Amaraweera.pdf"
-                download
-                className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white"
-                style={{ background: "var(--brand)" }}
-              >
+              <RainbowButton href="/cv/Janindu Amaraweera.pdf" download>
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
                 Download CV (PDF)
-              </a>
+              </RainbowButton>
               <Link
                 href="/experience"
                 className="inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold"

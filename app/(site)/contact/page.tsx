@@ -2,6 +2,7 @@ import Image from "next/image";
 import { FadeIn } from "@/components/ui/fade-in";
 import { GradientText } from "@/components/ui/gradient-text";
 import { LanyardClient } from "@/components/ui/lanyard-client";
+import { BackgroundGradient } from "@/components/ui/background-gradient";
 import { PORTRAIT } from "@/lib/site";
 
 export default function ContactPage() {
@@ -119,6 +120,7 @@ export default function ContactPage() {
           {/* Left column */}
           <div className="space-y-10">
             <FadeIn>
+              <BackgroundGradient containerClassName="rounded-2xl">
               <div
                 className="rounded-2xl border p-6 shadow-sm sm:p-8"
                 style={{ background: "var(--card)", borderColor: "var(--border)" }}
@@ -206,10 +208,12 @@ export default function ContactPage() {
                   </button>
                 </form>
               </div>
+              </BackgroundGradient>
             </FadeIn>
 
             <FadeIn delay={0.05}>
               <div className="grid gap-6 sm:grid-cols-2">
+                <BackgroundGradient containerClassName="rounded-2xl">
                 <div
                   className="rounded-2xl border p-6 shadow-sm"
                   style={{ background: "var(--card)", borderColor: "var(--border)" }}
@@ -232,6 +236,8 @@ export default function ContactPage() {
                     </li>
                   </ul>
                 </div>
+                </BackgroundGradient>
+                <BackgroundGradient containerClassName="rounded-2xl">
                 <div
                   className="rounded-2xl border p-6 shadow-sm"
                   style={{ background: "var(--card)", borderColor: "var(--border)" }}
@@ -259,6 +265,7 @@ export default function ContactPage() {
                     ))}
                   </div>
                 </div>
+                </BackgroundGradient>
               </div>
             </FadeIn>
 
@@ -314,6 +321,7 @@ export default function ContactPage() {
             </FadeIn>
 
             <FadeIn delay={0.06}>
+              <BackgroundGradient containerClassName="rounded-2xl">
               <div
                 className="overflow-hidden rounded-2xl border shadow-lg"
                 style={{ borderColor: "var(--border)" }}
@@ -446,9 +454,11 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
+              </BackgroundGradient>
             </FadeIn>
 
             <FadeIn delay={0.1}>
+              <BackgroundGradient containerClassName="rounded-2xl">
               <div
                 className="rounded-2xl border p-6 text-center text-sm"
                 style={{
@@ -470,6 +480,7 @@ export default function ContactPage() {
                   janiduamaraweera@gmail.com
                 </a>
               </div>
+              </BackgroundGradient>
             </FadeIn>
           </div>
         </div>
