@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FadeIn } from "@/components/ui/fade-in";
 import { GradientText } from "@/components/ui/gradient-text";
 import { getProjectBySlug } from "@/lib/projects-data";
@@ -85,21 +85,6 @@ const futureVision = [
   { icon: "🚁", title: "Drone-Based AI Volume Tracking" },
 ];
 
-const appScreenshots = [
-  "/pics/ceylonmine/Picture1.png",
-  "/pics/ceylonmine/Picture2.png",
-  "/pics/ceylonmine/Picture3.jpg",
-  "/pics/ceylonmine/Picture4.png",
-  "/pics/ceylonmine/Picture5.png",
-  "/pics/ceylonmine/Picture6.png",
-  "/pics/ceylonmine/Picture7.png",
-  "/pics/ceylonmine/Picture8.png",
-  "/pics/ceylonmine/Picture9.png",
-  "/pics/ceylonmine/Picture10.png",
-  "/pics/ceylonmine/Picture11.png",
-  "/pics/ceylonmine/Picture12.png",
-  "/pics/ceylonmine/Picture14.png",
-];
 
 const siteVisits = [
   { src: "/pics/ceylonmine/image1.jpg", caption: "Winning moment at Cutting Edge 2025 – 2nd Runners-up 🏆" },
@@ -123,16 +108,29 @@ const siteVisits = [
   { src: "/pics/ceylonmine/image19.png", caption: "What GSMB Says About CeylonMine" },
 ];
 
+const SLIDES = Array.from({ length: 15 }, (_, i) => `/presentation/${i + 1}.png`);
+
 function CeylonMineDetail() {
   const [lightbox, setLightbox] = useState<string | null>(null);
+  const [slide, setSlide] = useState(0);
+  const [slideDir, setSlideDir] = useState(1);
+
+  const goSlide = (dir: 1 | -1) => {
+    setSlideDir(dir);
+    setSlide((s) => (s + dir + SLIDES.length) % SLIDES.length);
+  };
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") setLightbox(null);
+      if (!lightbox) {
+        if (e.key === "ArrowRight") goSlide(1);
+        if (e.key === "ArrowLeft") goSlide(-1);
+      }
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [lightbox]);
 
   return (
     <>
@@ -217,27 +215,6 @@ function CeylonMineDetail() {
         </div>
       </section>
 
-      {/* ── Hero Image ─────────────────────────────────────────────────────── */}
-      <section className="border-b" style={{ borderColor: "var(--border)", background: "var(--muted)" }}>
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border shadow-xl"
-            style={{ borderColor: "var(--border)" }}
-          >
-            <Image
-              src="/pics/ceylonmine/sample1.png"
-              alt="CeylonMine Platform"
-              fill
-              className="object-cover"
-              sizes="(max-width:768px) 100vw, 1200px"
-              priority
-            />
-          </motion.div>
-        </div>
-      </section>
 
       {/* ── Tech Stack ─────────────────────────────────────────────────────── */}
       <section className="border-b py-14" style={{ background: "var(--card)", borderColor: "var(--border)" }}>
@@ -355,46 +332,6 @@ function CeylonMineDetail() {
         </div>
       </section>
 
-      {/* ── App Screenshots ────────────────────────────────────────────────── */}
-      <section className="py-14 sm:py-16" style={{ background: "var(--muted)" }}>
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <FadeIn>
-            <h2 className="mb-3 text-3xl font-bold" style={{ color: "var(--foreground)" }}>
-              Platform Screens
-            </h2>
-            <p className="mb-8 text-sm" style={{ color: "var(--muted-fg)" }}>
-              Click any image to view full size.
-            </p>
-          </FadeIn>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {appScreenshots.map((src, i) => (
-              <motion.button
-                key={src}
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.04 }}
-                onClick={() => setLightbox(src)}
-                className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl border shadow-md hover:shadow-xl transition-shadow"
-                style={{ borderColor: "var(--border)" }}
-              >
-                <Image
-                  src={src}
-                  alt={`CeylonMine screen ${i + 1}`}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  sizes="(max-width:768px) 100vw, (max-width:1024px) 50vw, 33vw"
-                />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                  style={{ background: "rgba(0,0,0,0.35)" }}>
-                  <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
-                    View
-                  </span>
-                </div>
-              </motion.button>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ── GSMB Endorsement ───────────────────────────────────────────────── */}
       <section className="border-y py-14 sm:py-16" style={{ borderColor: "var(--border)", background: "var(--card)" }}>
@@ -474,24 +411,167 @@ function CeylonMineDetail() {
                 within the institution. GSMB has already considered it for future implementation.
               </p>
               <div
-                className="rounded-xl border p-5 text-center"
+                className="overflow-hidden rounded-xl border shadow-md"
                 style={{ borderColor: "var(--border)", background: "var(--card)" }}
               >
-                <span className="block text-4xl mb-3">🏛️</span>
-                <p className="text-sm font-semibold mb-1" style={{ color: "var(--foreground)" }}>
-                  Geological Survey & Mines Bureau
-                </p>
-                <p className="text-xs" style={{ color: "var(--muted-fg)" }}>
-                  Official approval granted for internal deployment and future live implementation.
-                </p>
+                <div className="relative aspect-[16/9] w-full">
+                  <Image
+                    src="/pics/ceylonmine/sample1.png"
+                    alt="GSMB Implementation Approval Letter"
+                    fill
+                    className="object-contain"
+                    sizes="(max-width:768px) 100vw, 600px"
+                  />
+                </div>
+                <div className="px-4 py-3 text-center" style={{ borderTop: "1px solid var(--border)" }}>
+                  <p className="text-sm font-semibold" style={{ color: "var(--foreground)" }}>
+                    🏛️ Geological Survey &amp; Mines Bureau
+                  </p>
+                  <p className="mt-0.5 text-xs" style={{ color: "var(--muted-fg)" }}>
+                    Official approval granted for internal deployment and future live implementation.
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ── Demo Portals ───────────────────────────────────────────────────── */}
+      {/* ── Presentation Slideshow ─────────────────────────────────────────── */}
       <section className="py-14 sm:py-16" style={{ background: "var(--muted)" }}>
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <span
+              className="mb-3 inline-flex rounded-full px-3 py-1 text-xs font-semibold"
+              style={{ background: "color-mix(in srgb, var(--brand) 10%, transparent)", color: "var(--brand)" }}
+            >
+              Cutting Edge 2025
+            </span>
+            <h2 className="mb-2 text-3xl font-bold" style={{ color: "var(--foreground)" }}>
+              Presentation Slides
+            </h2>
+            <p className="mb-8 text-sm" style={{ color: "var(--muted-fg)" }}>
+              Slides from our official presentation. Use arrows or keyboard ← → to navigate.
+            </p>
+          </FadeIn>
+
+          {/* Main slide viewer */}
+          <div
+            className="relative overflow-hidden rounded-2xl border shadow-xl"
+            style={{ borderColor: "var(--border)", background: "var(--card)" }}
+          >
+            {/* Slide */}
+            <div className="relative aspect-[16/9] w-full overflow-hidden">
+              <AnimatePresence mode="wait" custom={slideDir}>
+                <motion.div
+                  key={slide}
+                  custom={slideDir}
+                  initial={{ opacity: 0, x: slideDir * 80 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: slideDir * -80 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={SLIDES[slide]}
+                    alt={`CeylonMine Presentation Slide ${slide + 1}`}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width:768px) 100vw, 1200px"
+                    priority
+                  />
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Expand button */}
+              <button
+                onClick={() => setLightbox(SLIDES[slide])}
+                className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-sm transition-opacity hover:opacity-80"
+                style={{ background: "rgba(0,0,0,0.45)" }}
+                aria-label="View full size"
+              >
+                <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m4 0v4m0-4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                </svg>
+              </button>
+
+              {/* Side arrow — prev */}
+              <button
+                onClick={() => goSlide(-1)}
+                className="absolute left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full backdrop-blur-sm transition-opacity hover:opacity-80"
+                style={{ background: "rgba(0,0,0,0.45)" }}
+                aria-label="Previous slide"
+              >
+                <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+
+              {/* Side arrow — next */}
+              <button
+                onClick={() => goSlide(1)}
+                className="absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full backdrop-blur-sm transition-opacity hover:opacity-80"
+                style={{ background: "rgba(0,0,0,0.45)" }}
+                aria-label="Next slide"
+              >
+                <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Slide counter + dot nav */}
+            <div className="flex items-center justify-between gap-4 px-5 py-3" style={{ borderTop: "1px solid var(--border)" }}>
+              <span className="text-xs font-semibold tabular-nums" style={{ color: "var(--muted-fg)" }}>
+                {slide + 1} / {SLIDES.length}
+              </span>
+              <div className="flex flex-wrap justify-center gap-1.5">
+                {SLIDES.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => { setSlideDir(i > slide ? 1 : -1); setSlide(i); }}
+                    aria-label={`Go to slide ${i + 1}`}
+                    className="rounded-full transition-all duration-200"
+                    style={{
+                      width: i === slide ? "1.5rem" : "0.5rem",
+                      height: "0.5rem",
+                      background: i === slide ? "var(--brand)" : "var(--border)",
+                    }}
+                  />
+                ))}
+              </div>
+              <span className="text-xs" style={{ color: "var(--muted-fg)" }}>← → keys</span>
+            </div>
+          </div>
+
+          {/* Thumbnail strip */}
+          <div className="mt-4 grid grid-cols-5 gap-2 sm:grid-cols-8 lg:grid-cols-15">
+            {SLIDES.map((src, i) => (
+              <button
+                key={i}
+                onClick={() => { setSlideDir(i > slide ? 1 : -1); setSlide(i); }}
+                className="relative aspect-[16/9] overflow-hidden rounded-lg border-2 transition-all duration-200"
+                style={{
+                  borderColor: i === slide ? "var(--brand)" : "transparent",
+                  opacity: i === slide ? 1 : 0.55,
+                }}
+                aria-label={`Slide ${i + 1}`}
+              >
+                <Image
+                  src={src}
+                  alt={`Slide ${i + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="80px"
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Demo Portals ───────────────────────────────────────────────────── */}
+      <section className="py-14 sm:py-16" style={{ background: "var(--card)" }}>
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <div
