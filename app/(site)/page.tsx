@@ -35,7 +35,7 @@ const featured = [
     title: "Ticket Management System",
     desc: "Full-featured ticket system with user authentication, OOP design patterns, and a Spring Boot REST API.",
     tags: ["React", "Spring Boot", "Java"],
-    img: "/pics/Daraz.jpg",
+    img: "/pics/myjourney/medium1.png",
     href: "/projects",
   },
 ];
