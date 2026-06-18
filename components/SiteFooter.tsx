@@ -74,7 +74,7 @@ export function SiteFooter() {
             <Logo />
             <p className="text-sm leading-relaxed" style={{ color: "var(--muted-fg)" }}>
               Full-stack engineer from Panadura, Sri Lanka. Building scalable software
-              for Sri Lanka and the world. Seeking a 1-year internship.
+              for Sri Lanka and the world. Currently interning at HP Innovations.
             </p>
             <div className="flex gap-2">
               {SOCIALS.map((s) => (
@@ -160,7 +160,7 @@ export function SiteFooter() {
               Connect
             </h3>
             <p className="text-sm" style={{ color: "var(--muted-fg)" }}>
-              Open to internship opportunities and collaborations.
+              Currently interning at HP Innovations. Open to collaborations.
             </p>
             <div className="flex flex-col gap-2">
               <Link

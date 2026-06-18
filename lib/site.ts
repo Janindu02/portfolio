@@ -2,6 +2,7 @@ export const NAV = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
+  { href: "/experience", label: "Experience" },
   { href: "/research", label: "Research" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },

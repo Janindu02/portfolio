@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FadeIn } from "@/components/ui/fade-in";
+import { GradientText } from "@/components/ui/gradient-text";
 import { PORTRAIT } from "@/lib/site";
 
 const contents = [
@@ -8,6 +9,7 @@ const contents = [
   { href: "#education", label: "Academic Foundation" },
   { href: "#recognition", label: "Recognition & Endorsements" },
   { href: "#honors", label: "Honors & Achievements" },
+  { href: "#testimonials", label: "What Teammates Say" },
 ];
 
 export default function AboutPage() {
@@ -24,11 +26,12 @@ export default function AboutPage() {
             </span>
             <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl" style={{ color: "var(--foreground)" }}>
               Turning complex problems into{" "}
-              <em style={{ color: "var(--brand)" }} className="not-italic">clean, efficient code</em>.
+              <GradientText>clean, efficient code</GradientText>.
             </h1>
             <p className="mt-5 max-w-xl text-lg" style={{ color: "var(--muted-fg)" }}>
-              As a third-year Software Engineering undergraduate, I&apos;m passionate about building
-              scalable, user-centred solutions with hands-on experience in real-world projects.
+              A passionate tech explorer and Software Engineering undergraduate from Panadura, Sri Lanka,
+              studying at IIT affiliated with the University of Westminster — building user-friendly,
+              scalable software and solving real-world problems through code.
             </p>
           </FadeIn>
           <FadeIn className="flex justify-center lg:justify-end" delay={0.06}>
@@ -56,14 +59,21 @@ export default function AboutPage() {
             </h2>
             <div className="mt-6 space-y-4" style={{ color: "var(--muted-fg)" }}>
               <p>
-                My path started with a Grade 5 Scholarship and a curiosity for how things work. That
-                curiosity grew into a passion for building—web platforms, tools, and systems that solve real
-                problems. At the University of Westminster, I took that passion to a team of four and built
-                CeylonMine, a platform to digitise mining operations in Sri Lanka that went on to win 2nd
-                Runners-up at Cutting Edge 2025 and earn official endorsement from the GSMB.
+                Ever since I was a kid, I&apos;ve been curious about how things work especially in tech.
+                That curiosity started early: in Grade 7, armed with just a basic mobile phone and endless
+                curiosity, I launched my first tech YouTube channel from my bedroom. No fancy gear, just
+                passion. I recorded tutorials, app reviews, and tech tips driven by a genuine love for
+                technology and a desire to help others understand it. By 2019 the channel had grown past
+                500 subscribers and one video pulled 15,000+ views in a short time.
               </p>
               <p>
-                Today I split my time between coursework and shipping—writing clean APIs, building
+                That foundation of building things for others grew into something bigger. At the University
+                of Westminster I teamed up with three others to build CeylonMine, a platform to digitise
+                mining operations in Sri Lanka. It went on to win 2nd Runners-up at Cutting Edge 2025 and
+                earn official endorsement from the GSMB.
+              </p>
+              <p>
+                Today I split my time between coursework and shipping writing clean APIs, building
                 responsive UIs, and contributing to open-source projects like Coding Lanka. I believe in
                 readable, well-tested code and software that actually serves people.
               </p>
@@ -95,6 +105,7 @@ export default function AboutPage() {
                   degree: "BEng Software Engineering",
                   range: "2023 — 2027",
                   place: "London, UK",
+                  logo: "/education/westmin.png",
                   points: [
                     "Full-stack development, algorithms, and software architecture",
                     "CeylonMine project — 2nd Runners-up at Cutting Edge 2025",
@@ -105,6 +116,7 @@ export default function AboutPage() {
                   degree: "G.C.E. A/L — Combined Maths, Physics, Chemistry",
                   range: "2014 — 2023",
                   place: "Matara, Sri Lanka",
+                  logo: "/education/rahula.png",
                   points: [
                     "G.C.E. O/L: 9 A's in English Medium, including ICT (2019)",
                     "G.C.E. A/L: Mathematics stream (2022)",
@@ -115,24 +127,56 @@ export default function AboutPage() {
                   degree: "Primary Education",
                   range: "2009 — 2014",
                   place: "Matara, Sri Lanka",
+                  logo: "/education/vijhitha.jpeg",
                   points: ["Grade 5 Scholarship Examination: 181 marks (2013)"],
                 },
-              ].map((e) => (
-                <div
-                  key={e.school}
-                  className="card-hover rounded-2xl border p-6 shadow-sm"
-                  style={{ background: "var(--card)", borderColor: "var(--border)" }}
-                >
-                  <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--muted-fg)" }}>{e.place}</p>
-                  <p className="mt-1 text-lg font-bold" style={{ color: "var(--foreground)" }}>{e.degree}</p>
-                  <p className="text-sm font-semibold" style={{ color: "var(--brand)" }}>{e.school}</p>
-                  <p className="mt-1 text-xs" style={{ color: "var(--muted-fg)" }}>{e.range}</p>
-                  <ul className="mt-4 list-disc space-y-1 pl-5 text-sm" style={{ color: "var(--muted-fg)" }}>
-                    {e.points.map((p) => (
-                      <li key={p}>{p}</li>
-                    ))}
-                  </ul>
-                </div>
+              ].map((e, i) => (
+                <FadeIn key={e.school} delay={i * 0.08}>
+                  <div
+                    className="card-hover group rounded-2xl border p-6 shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-1"
+                    style={{ background: "var(--card)", borderColor: "var(--border)" }}
+                  >
+                    <div className="flex items-start gap-5">
+                      <div
+                        className="relative shrink-0 overflow-hidden rounded-2xl border-2 p-2 shadow-md transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg group-hover:rotate-2"
+                        style={{
+                          background: "var(--surface)",
+                          borderColor: "color-mix(in srgb, var(--brand) 25%, var(--border))",
+                          boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
+                        }}
+                      >
+                        <Image
+                          src={e.logo}
+                          alt={`${e.school} logo`}
+                          width={80}
+                          height={80}
+                          className="h-20 w-20 rounded-xl object-contain transition-all duration-500 group-hover:brightness-105"
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--muted-fg)" }}>{e.place}</p>
+                          <span
+                            className="rounded-full px-2.5 py-0.5 text-xs font-medium"
+                            style={{ background: "color-mix(in srgb, var(--brand) 10%, transparent)", color: "var(--brand)" }}
+                          >
+                            {e.range}
+                          </span>
+                        </div>
+                        <p className="mt-1 text-lg font-bold leading-snug" style={{ color: "var(--foreground)" }}>{e.degree}</p>
+                        <p className="text-sm font-semibold" style={{ color: "var(--brand)" }}>{e.school}</p>
+                      </div>
+                    </div>
+                    <ul className="mt-4 space-y-1.5 pl-1">
+                      {e.points.map((p) => (
+                        <li key={p} className="flex items-start gap-2 text-sm" style={{ color: "var(--muted-fg)" }}>
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: "var(--brand)" }} />
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </FadeIn>
               ))}
             </div>
           </FadeIn>
@@ -223,6 +267,36 @@ export default function AboutPage() {
               </div>
             </div>
           </FadeIn>
+
+          <FadeIn id="testimonials">
+            <h2 className="flex items-center gap-2 text-xl font-bold" style={{ color: "var(--foreground)" }}>
+              <svg className="h-6 w-6" style={{ color: "var(--brand)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+              What Teammates Say
+            </h2>
+            <p className="mt-1 text-sm" style={{ color: "var(--muted-fg)" }}>Feedback from collaborators on real projects.</p>
+
+            <div
+              className="mt-6 flex flex-col items-center justify-center gap-4 rounded-2xl border border-dashed px-8 py-14 text-center"
+              style={{ borderColor: "color-mix(in srgb, var(--brand) 30%, var(--border))", background: "color-mix(in srgb, var(--brand) 4%, var(--card))" }}
+            >
+              <span
+                className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-widest"
+                style={{
+                  background: "color-mix(in srgb, var(--brand) 10%, var(--card))",
+                  borderColor: "color-mix(in srgb, var(--brand) 35%, transparent)",
+                  color: "var(--brand)",
+                }}
+              >
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-current" />
+                Coming Soon
+              </span>
+              <p className="max-w-xs text-sm leading-relaxed" style={{ color: "var(--muted-fg)" }}>
+                Still gathering feedback from collaborators. Check back soon.
+              </p>
+            </div>
+          </FadeIn>
         </article>
 
         <aside className="mt-12 space-y-6 lg:mt-0 lg:w-80 lg:shrink-0">
@@ -262,8 +336,8 @@ export default function AboutPage() {
               </nav>
             </div>
             <div className="rounded-2xl p-6 text-center shadow-lg" style={{ background: "var(--brand)" }}>
-              <p className="font-semibold text-white">Looking for an intern?</p>
-              <p className="mt-2 text-sm" style={{ color: "rgba(255,255,255,0.8)" }}>Available for a 1-year internship starting 2025.</p>
+              <p className="font-semibold text-white">Currently @ HP Innovations</p>
+              <p className="mt-2 text-sm" style={{ color: "rgba(255,255,255,0.8)" }}>Interning since September 2025. Open to collaborations and conversations.</p>
               <Link
                 href="/contact"
                 className="mt-4 inline-flex w-full items-center justify-center rounded-full py-2.5 text-sm font-semibold transition-transform hover:scale-[1.02]"

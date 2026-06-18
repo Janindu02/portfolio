@@ -59,8 +59,8 @@ export default function ContactPage() {
                 className="mt-5 max-w-xl text-lg leading-relaxed"
                 style={{ color: "var(--muted-fg)" }}
               >
-                Looking for a motivated intern or have a project in mind? Reach
-                out below or download my CV to review my background.
+                Have a project in mind or want to collaborate? Reach out below
+                or download my CV to review my background.
               </p>
 
               {/* Quick-action chips */}
@@ -274,7 +274,7 @@ export default function ContactPage() {
                     Current availability
                   </p>
                   <p className="mt-1 text-sm" style={{ color: "var(--muted-fg)" }}>
-                    Seeking 1-year internship starting 2025
+                    Interning at HP Innovations · Since September 2025
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -282,13 +282,13 @@ export default function ContactPage() {
                     className="rounded-full px-3 py-1 text-xs font-semibold text-white"
                     style={{ background: "var(--foreground)" }}
                   >
-                    On-site or Remote
+                    Open to Collaborations
                   </span>
                   <span
                     className="rounded-full px-3 py-1 text-xs font-semibold text-white"
                     style={{ background: "var(--foreground)" }}
                   >
-                    1-Year Internship
+                    Freelance Projects
                   </span>
                 </div>
               </div>
@@ -351,9 +351,9 @@ export default function ContactPage() {
                     </h4>
                     <p className="mt-2 leading-relaxed">
                       Third-year Software Engineering undergraduate at the University of Westminster,
-                      passionate about building scalable, user-centred software. Hands-on experience
-                      across full-stack development and open-source contribution. Seeking a 1-year
-                      industry internship.
+                      passionate about building scalable, user-centred software. Currently interning
+                      at HP Innovations (since September 2025) with hands-on experience across
+                      full-stack development and open-source contribution.
                     </p>
                   </div>
                   <div>

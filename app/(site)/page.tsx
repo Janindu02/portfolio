@@ -9,7 +9,6 @@ import { GradientText } from "@/components/ui/gradient-text";
 import { MovingBorderButton } from "@/components/ui/moving-border";
 import { CometCard } from "@/components/ui/comet-card";
 import { FadeIn } from "@/components/ui/fade-in";
-import { TestimonialCarousel } from "@/components/ui/profile-card-testimonial-carousel";
 import { VerticalLoop } from "@/components/ui/vertical-loop";
 import { ProfileHeroCard } from "@/components/ui/profile-hero-card";
 import { ScrollGallery } from "@/components/ui/scroll-gallery";
@@ -80,7 +79,7 @@ export default function HomePage() {
               }}
             >
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              Seeking Internship · Open to Work
+              Intern @ HP Innovations 
             </span>
 
             <p
@@ -360,10 +359,10 @@ export default function HomePage() {
                 className="rounded-2xl p-6 text-white shadow-lg"
                 style={{ background: "var(--brand)" }}
               >
-                <p className="font-semibold">Looking for a motivated intern?</p>
+                <p className="font-semibold">Let&apos;s build something together</p>
                 <p className="mt-2 text-sm opacity-85">
-                  Available for a 1-year internship starting 2025 — let&apos;s discuss what I can
-                  build for your team.
+                  Currently interning at HP Innovations. Open to collaborations, freelance projects,
+                  and conversations about what we can build.
                 </p>
                 <Link
                   href="/contact"
@@ -447,8 +446,23 @@ export default function HomePage() {
               Feedback from collaborators on real projects.
             </p>
           </FadeIn>
-          <div className="mt-12">
-            <TestimonialCarousel />
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 rounded-2xl border border-dashed px-8 py-14 text-center"
+            style={{ borderColor: "color-mix(in srgb, var(--brand) 30%, var(--border))", background: "color-mix(in srgb, var(--brand) 4%, var(--card))" }}
+          >
+            <span
+              className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-widest"
+              style={{
+                background: "color-mix(in srgb, var(--brand) 10%, var(--card))",
+                borderColor: "color-mix(in srgb, var(--brand) 35%, transparent)",
+                color: "var(--brand)",
+              }}
+            >
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-current" />
+              Coming Soon
+            </span>
+            <p className="max-w-xs text-sm leading-relaxed" style={{ color: "var(--muted-fg)" }}>
+              Still gathering feedback from collaborators. Check back soon.
+            </p>
           </div>
         </div>
       </section>

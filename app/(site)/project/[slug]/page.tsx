@@ -717,7 +717,7 @@ function CeylonMineDetail() {
               Interested in working together?
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-sm" style={{ color: "var(--muted-fg)" }}>
-              I&apos;m seeking a 1-year internship starting 2025. Let&apos;s talk about what I can build for your team.
+              Currently interning at HP Innovations. Open to collaborations and conversations about what we can build together.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
@@ -1357,7 +1357,7 @@ function PlaneSeatDetail() {
               Interested in working together?
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-sm" style={{ color: "var(--muted-fg)" }}>
-              I&apos;m seeking a 1-year internship starting 2025. Let&apos;s talk about what I can build for your team.
+              Currently interning at HP Innovations. Open to collaborations and conversations about what we can build together.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
@@ -2038,7 +2038,7 @@ function CodingLankaDetail() {
               Interested in working together?
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-sm" style={{ color: "var(--muted-fg)" }}>
-              I&apos;m seeking a 1-year internship starting 2025. Let&apos;s talk about what I can build for your team.
+              Currently interning at HP Innovations. Open to collaborations and conversations about what we can build together.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link

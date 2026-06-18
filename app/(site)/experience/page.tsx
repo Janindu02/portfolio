@@ -1,7 +1,20 @@
 import Link from "next/link";
 import { FadeIn } from "@/components/ui/fade-in";
+import { GradientText } from "@/components/ui/gradient-text";
 
 const jobs = [
+  {
+    title: "Software Engineering Intern",
+    company: "ArkTide Innovations",
+    place: "Colombo, Sri Lanka",
+    range: "Sep 2025 — Present",
+    desc: "Working as a software engineering intern at ArkTide Innovations (formerly HP Innovations), contributing to full-stack SaaS products built for Sri Lanka and the world. Involved in feature development, UI work, and real-world shipping cycles.",
+    wins: [
+      "Contributing to production SaaS products used by real customers",
+      "Gaining hands-on experience in a fast-paced product team environment",
+    ],
+    tags: ["Next.js", "TypeScript", "React", "Tailwind CSS", "SaaS"],
+  },
   {
     title: "Full-stack Developer",
     company: "CeylonMine (Team Project)",
@@ -60,7 +73,7 @@ export default function ExperiencePage() {
               Engineering Journey
             </div>
             <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl" style={{ color: "var(--foreground)" }}>
-              Project Experience &amp; Achievements
+              Experience &amp; <GradientText>Achievements</GradientText>
             </h1>
             <p className="mt-4 text-lg" style={{ color: "var(--muted-fg)" }}>
               A timeline of projects built during my degree at the University of Westminster, alongside

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import {
   motion,
@@ -27,13 +27,15 @@ import { GradientText } from "@/components/ui/gradient-text";
 
 const AWARDS = [
   {
-    src: "/awards/cutting%20edge.jpg",
+    src: "/awards/cutting edge.jpg",
     num: "01",
     year: "2025",
     title: "2nd Runners-up",
     event: "Cutting Edge 2025",
-    org: "CeylonMine · IESL & GSMB · Sri Lanka",
-    featured: true,
+    org: "CeylonMine · GSMB · Sri Lanka",
+    featured: false,
+    portrait: false,
+    center: false,
   },
   {
     src: "/awards/nbqsa.jpg",
@@ -43,24 +45,31 @@ const AWARDS = [
     event: "National Best Quality Software Awards",
     org: "BCS Sri Lanka",
     featured: false,
+    portrait: false,
+    center: false,
   },
-  {
-    src: "/awards/nbqsa2.jpg",
-    num: "03",
-    year: "2024",
-    title: "NBQSA",
-    event: "National Best Quality Software Awards",
-    org: "BCS Sri Lanka",
-    featured: false,
-  },
+  /* ── Centre hero — spans 2 rows in the middle column ── */
   {
     src: "/awards/nbqsa%203.jpg",
-    num: "04",
+    num: "03",
     year: "2024",
     title: "NBQSA Ceremony",
     event: "National Best Quality Software Awards",
     org: "BCS Sri Lanka",
     featured: false,
+    portrait: true,
+    center: true,
+  },
+  {
+    src: "/awards/nbqsa2.jpg",
+    num: "04",
+    year: "2024",
+    title: "NBQSA",
+    event: "National Best Quality Software Awards",
+    org: "BCS Sri Lanka",
+    featured: false,
+    portrait: false,
+    center: false,
   },
   {
     src: "/awards/1776176340463.jpg",
@@ -70,6 +79,8 @@ const AWARDS = [
     event: "Academic Excellence",
     org: "University of Westminster · IIT Campus",
     featured: false,
+    portrait: false,
+    center: false,
   },
 ];
 
@@ -77,9 +88,11 @@ const AWARDS = [
 function AwardCard({
   award,
   index,
+  mobile = false,
 }: {
   award: (typeof AWARDS)[number];
   index: number;
+  mobile?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -123,7 +136,7 @@ function AwardCard({
   const base = index * 0.1; // stagger base delay
 
   return (
-    <div className={award.featured ? "sm:col-span-2" : ""}>
+    <div className={award.center && !mobile ? "h-full" : ""}>
       {/* ── Entrance wrapper ─────────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: 52, scale: 0.94 }}
@@ -131,13 +144,14 @@ function AwardCard({
         viewport={{ once: true, margin: "-60px" }}
         transition={{ duration: 0.7, delay: base, ease: [0.22, 1, 0.36, 1] }}
         style={{ perspective: 900 }}
+        className={award.center && !mobile ? "h-full" : ""}
       >
         {/* ── Card shell ─────────────────────────────────────────────── */}
         <motion.div
           ref={ref}
           onMouseMove={onMove}
           onMouseLeave={onLeave}
-          className="relative overflow-hidden rounded-2xl"
+          className={`relative overflow-hidden rounded-2xl${award.center && !mobile ? " h-full flex flex-col" : ""}`}
           style={{
             rotateX,
             rotateY,
@@ -181,7 +195,13 @@ function AwardCard({
           {/* ── Photo thumbnail ──────────────────────────────────── */}
           <div
             className={`relative overflow-hidden ${
-              award.featured ? "aspect-[21/7] sm:aspect-[21/6]" : "aspect-[4/3]"
+              award.center && !mobile
+                ? "flex-1 min-h-0"
+                : award.featured
+                ? "aspect-[21/8]"
+                : award.portrait
+                ? "aspect-[3/4]"
+                : "aspect-[4/3]"
             }`}
           >
             {/* Parallax container — slightly oversized so edges never show */}
@@ -193,7 +213,7 @@ function AwardCard({
                 src={award.src}
                 alt={award.event}
                 fill
-                className="object-cover"
+                className={award.portrait ? "object-cover object-top" : "object-cover"}
                 sizes={
                   award.featured
                     ? "(max-width:640px) 100vw, 100vw"
@@ -397,40 +417,41 @@ export function AwardsShowcase() {
             </p>
           </div>
 
-          {/* Count widget */}
-          <motion.div
-            className="shrink-0 rounded-2xl border px-5 py-3 text-center"
-            style={{ background: "var(--card)", borderColor: "var(--border)" }}
-            initial={{ opacity: 0, scale: 0.85 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{
-              type: "spring",
-              stiffness: 260,
-              damping: 22,
-              delay: 0.15,
-            }}
-          >
-            <p
-              className="text-3xl font-black"
-              style={{ color: "var(--brand)" }}
-            >
-              {AWARDS.length}
-            </p>
-            <p
-              className="text-xs font-semibold uppercase tracking-wide"
-              style={{ color: "var(--muted-fg)" }}
-            >
-              Awards
-            </p>
-          </motion.div>
         </motion.div>
 
-        {/* Bento grid */}
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-5">
+        {/* Mobile / tablet — simple responsive stack */}
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:hidden">
           {AWARDS.map((award, i) => (
-            <AwardCard key={award.num} award={award} index={i} />
+            <div key={award.num} className={award.center ? "sm:col-span-2" : ""}>
+              <AwardCard award={award} index={i} mobile />
+            </div>
           ))}
+        </div>
+
+        {/* Desktop — bento: centre card spans 2 rows in column 2 */}
+        <div
+          className="mt-10 hidden gap-5 lg:grid"
+          style={{
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateRows: "auto auto",
+          }}
+        >
+          {AWARDS.map((award, i) => {
+            const gridStyle: React.CSSProperties = award.center
+              ? { gridColumn: "2", gridRow: "1 / span 2" }
+              : i === 0
+              ? { gridColumn: "1", gridRow: "1" }
+              : i === 1
+              ? { gridColumn: "3", gridRow: "1" }
+              : i === 3
+              ? { gridColumn: "1", gridRow: "2" }
+              : { gridColumn: "3", gridRow: "2" };
+            return (
+              <div key={award.num} style={gridStyle}>
+                <AwardCard award={award} index={i} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
